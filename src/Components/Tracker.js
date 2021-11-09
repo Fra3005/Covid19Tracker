@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Navigations from "./AppBar";
 import axios from "axios";
 
 const url = {
@@ -17,5 +18,10 @@ export default function Tracker() {
     getCovidApi();
   }, []);
 
-  return <div>{JSON.stringify(api)}</div>;
+  return (
+    <div>
+      <Navigations />
+      <div>{JSON.stringify(api)}</div>
+    </div>
+  );
 }

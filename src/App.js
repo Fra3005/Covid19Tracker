@@ -4,7 +4,6 @@ import Tracker from "./Components/Tracker";
 function App() {
   return (
     <div className="App">
-      <Navigations />
       <Tracker />
     </div>
   );
