@@ -1,5 +1,21 @@
-import react from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
+const url = {
+  all: "https://disease.sh/v3/covid-19/all",
+  countries: "https://disease.sh/v3/covid-19/countries",
+};
 export default function Tracker() {
-  return <div>TRACKER</div>;
+  const [api, setApi] = useState([]);
+
+  const getCovidApi = async () => {
+    const response = await axios.get(url.all);
+    setApi(response.data);
+  };
+
+  useEffect(() => {
+    getCovidApi();
+  }, []);
+
+  return <div>{JSON.stringify(api)}</div>;
 }
