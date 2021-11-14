@@ -1,13 +1,10 @@
 import React, {useState} from "react";
 import {Tab, Tabs} from '@mui/material';
-import GeneralData from './GeneralData';
 
 export default function TabNav() {
 
   const [value, setValue] = useState(0)
   
-
-
     const handleChange = (event, newValue) => {
         setValue(newValue);
       
@@ -23,7 +20,7 @@ export default function TabNav() {
         onChange={handleChange}
         
       >
-        <Tab label="General Data"/>
+        <Tab label="General Data" href="/General"/>
         <Tab label="Item Two" />
         <Tab label="Item Three" />
       </Tabs>
