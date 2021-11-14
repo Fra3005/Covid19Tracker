@@ -7,7 +7,6 @@ import virus from '../assets/virus.jpg'
 
 const url = {
   all: "https://disease.sh/v3/covid-19/all",
-  countries: "https://disease.sh/v3/covid-19/countries",
 };
 
 export default function GeneralData() {
@@ -68,7 +67,7 @@ export default function GeneralData() {
       </Card>
 
     </div>
-    <div>
+    <div style={{display:"flex", maxWidth:900}}>
       <Bar
       style={{width:"100px"}}
         data={state}
