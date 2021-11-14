@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 
 import GeneralData from "./Components/GeneralData";
+import CountryData from './Components/CountryData';
 
 import Tracker from "./Components/Tracker";
 function App() {
@@ -14,7 +15,9 @@ function App() {
     <Tracker />
     <Routes>
       <Route path="/General" element={ <GeneralData />}> 
-      </Route>     
+      </Route>  
+      <Route path="/country" element= {<CountryData/>}>
+        </Route>   
     </Routes>
   </Router>
   

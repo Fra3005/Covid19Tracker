@@ -5,9 +5,9 @@ export default function TabNav() {
 
   const [value, setValue] = useState(0)
   
-    const handleChange = (event, newValue) => {
+    const handleChange = (newValue) => {
         setValue(newValue);
-      
+        console.log("NEW", newValue)    
       };
 
 
@@ -20,9 +20,8 @@ export default function TabNav() {
         onChange={handleChange}
         
       >
-        <Tab label="General Data" href="/General"/>
-        <Tab label="Item Two" />
-        <Tab label="Item Three" />
+        <Tab label="General Data" href="/General" tabIndex={0}/>
+        <Tab label="Country Data" href="/country" tabIndex={1} />
       </Tabs>
     </div>
   );

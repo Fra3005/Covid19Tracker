@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Bar } from "react-chartjs-2";
-import { Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent, Typography, CardActionArea, CardMedia } from "@mui/material";
+import virus from '../assets/virus.jpg'
+
+
 const url = {
   all: "https://disease.sh/v3/covid-19/all",
   countries: "https://disease.sh/v3/covid-19/countries",
@@ -49,18 +52,25 @@ export default function GeneralData() {
   return (
     <>
     <div>
-      <Card>
+      <Card sx={{ maxWidth: 450, marginTop:8, marginBottom:5 }}>
+        <CardActionArea>
+        <CardMedia
+         component="img"
+         height="140"
+         image={virus}
+         alt="green iguana"/>
         <CardContent>
           <Typography><b>Casi Totali</b>: {totalCases} milioni</Typography>
           <Typography><b>Morti Totali</b>: {deathCases} milioni</Typography>
           <Typography><b>Nazioni Infettate</b>: {countryInfettati}</Typography>
         </CardContent>
+        </CardActionArea>
       </Card>
 
     </div>
     <div>
       <Bar
-      style={{width:"100px", height:"100px"}}
+      style={{width:"100px"}}
         data={state}
         options={{
           plugins: {
