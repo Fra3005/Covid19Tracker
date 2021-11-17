@@ -1,13 +1,15 @@
 import React, {useState} from "react";
 import {Tab, Tabs} from '@mui/material';
+import {useNavigate} from 'react-router-dom'
 
 export default function TabNav() {
-
+  const navigateTo = useNavigate()
   const [value, setValue] = useState(0)
   
-    const handleChange = (newValue) => {
+    const handleChange = (e, newValue) => {
+        console.log("NEW", newValue)
+        navigateTo(newValue)
         setValue(newValue);
-        console.log("NEW", newValue)    
       };
 
 
@@ -15,13 +17,12 @@ export default function TabNav() {
   return (
     <div style={{ display: "flex", justifyContent: "space-evenly" }}>
       <Tabs
-        value={value}
         aria-label="basic tabs example"
         onChange={handleChange}
-        
+        value={value}
       >
-        <Tab label="General Data" href="/General" tabIndex={0}/>
-        <Tab label="Country Data" href="/country" tabIndex={1} />
+        <Tab label="General Data" value="/General" tabIndex={0}/>
+        <Tab label="Country Data" value="/country" tabIndex={1} />
       </Tabs>
     </div>
   );
