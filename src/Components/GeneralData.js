@@ -7,6 +7,7 @@ import {
   Typography,
   CardActionArea,
   CardMedia,
+  Grid,
 } from "@mui/material";
 import virus from "../assets/virus.jpg";
 import ricoverati from "../assets/ricoverati.jpg";
@@ -33,9 +34,10 @@ const continenti = [
 
 export default function GeneralData() {
   const array = [];
+  const array1 = [];
   const [api, setApi] = useState([]);
-  const [arrayFiltered, setArrayFiltered] = useState(array);
-  const [arrayFilteredByDeath, setArrayFilteredByDeath] = useState(array);
+  const [arrayFiltered, setArrayFiltered] = useState([]);
+  const [arrayFilteredByDeath, setArrayFilteredByDeath] = useState([]);
   const [countryInfettati, setCountryInfettati] = useState(0);
   const [totalCases, setTotalCases] = useState(0);
   const [dailyCases, setDailyCases] = useState(0);
@@ -60,7 +62,7 @@ export default function GeneralData() {
         nation: item.country,
         value: item.todayCases,
         total: item.cases,
-        death: item.deaths
+        death: item.deaths,
       }))
     );
   };
@@ -76,75 +78,105 @@ export default function GeneralData() {
       for (let i = 0; i < continenti.length; i++) {
         if (country === continenti[i]) {
           array.push(element);
+          array1.push(element);
         }
-        
       }
     });
-    setArrayFiltered(array);
     sortNationByCases(array);
-    sortNationByDeath(arrayFilteredByDeath);
+    setArrayFiltered(array);
+    sortNationByDeath(array1);
+    setArrayFilteredByDeath(array1);
+    console.log("ARRAYCASES", arrayFiltered);
+    //sortNationByCases(array);
+    //sortNationByDeath(arrayFilteredByDeath);
+    //setArrayFilteredByDeath(arrayFilteredByDeath);
   }, [continent]);
 
-
   const state1 = {
-    labels: [arrayFiltered[0]?.nation, arrayFiltered[1]?.nation, 
-            arrayFiltered[2]?.nation,arrayFiltered[3]?.nation,
-            arrayFiltered[4]?.nation, arrayFiltered[5]?.nation,
-            arrayFiltered[6]?.nation,arrayFiltered[7]?.nation,
-            arrayFiltered[8]?.nation, arrayFiltered[9]?.nation,
-            arrayFiltered[10]?.nation],
+    labels: [
+      arrayFiltered[0]?.nation,
+      arrayFiltered[1]?.nation,
+      arrayFiltered[2]?.nation,
+      arrayFiltered[3]?.nation,
+      arrayFiltered[4]?.nation,
+      arrayFiltered[5]?.nation,
+      arrayFiltered[6]?.nation,
+      arrayFiltered[7]?.nation,
+      arrayFiltered[8]?.nation,
+      arrayFiltered[9]?.nation,
+      arrayFiltered[10]?.nation,
+    ],
     datasets: [
       {
         label: "Casi Totali",
-        backgroundColor: ["rgb(255, 205, 86)"],
+        backgroundColor: ["rgb(255, 205, 86)", "rgb(255, 99, 132)"],
         borderColor: "rgba(0,0,0,1)",
         borderWidth: 2,
-        data: [arrayFiltered[0]?.total,arrayFiltered[1]?.total,
-              arrayFiltered[2]?.total,arrayFiltered[3]?.total,
-              arrayFiltered[4]?.total,arrayFiltered[5]?.total,
-              arrayFiltered[6]?.total,arrayFiltered[7]?.total,
-              arrayFiltered[8]?.total, arrayFiltered[9]?.total,
-              arrayFiltered[10]?.total],
+        data: [
+          arrayFiltered[0]?.total,
+          arrayFiltered[1]?.total,
+          arrayFiltered[2]?.total,
+          arrayFiltered[3]?.total,
+          arrayFiltered[4]?.total,
+          arrayFiltered[5]?.total,
+          arrayFiltered[6]?.total,
+          arrayFiltered[7]?.total,
+          arrayFiltered[8]?.total,
+          arrayFiltered[9]?.total,
+          arrayFiltered[10]?.total,
+        ],
       },
     ],
   };
 
-
-    const state = {
-    labels: [arrayFilteredByDeath[0]?.nation,arrayFilteredByDeath[1]?.nation,
-            arrayFilteredByDeath[2]?.nation,arrayFilteredByDeath[3]?.nation,
-            arrayFilteredByDeath[4]?.nation,arrayFilteredByDeath[5]?.nation,
-            arrayFilteredByDeath[6]?.nation,arrayFilteredByDeath[7]?.nation,
-            arrayFilteredByDeath[8]?.nation,arrayFilteredByDeath[9]?.nation,
-            arrayFilteredByDeath[10]?.nation,],
+  const state = {
+    labels: [
+      arrayFilteredByDeath[0]?.nation,
+      arrayFilteredByDeath[1]?.nation,
+      arrayFilteredByDeath[2]?.nation,
+      arrayFilteredByDeath[3]?.nation,
+      arrayFilteredByDeath[4]?.nation,
+      arrayFilteredByDeath[5]?.nation,
+      arrayFilteredByDeath[6]?.nation,
+      arrayFilteredByDeath[7]?.nation,
+      arrayFilteredByDeath[8]?.nation,
+      arrayFilteredByDeath[9]?.nation,
+      arrayFilteredByDeath[10]?.nation,
+    ],
     datasets: [
       {
         label: "Casi Giornalieri",
         backgroundColor: ["rgb(255, 99, 132)"],
         borderColor: "rgba(0,0,0,1)",
         borderWidth: 2,
-        data: [arrayFilteredByDeath[0]?.death,arrayFilteredByDeath[1]?.death,
-              arrayFilteredByDeath[2]?.death,arrayFilteredByDeath[3]?.death,
-              arrayFilteredByDeath[4]?.death,arrayFilteredByDeath[5]?.death,
-              arrayFilteredByDeath[6]?.death,arrayFilteredByDeath[7]?.death,
-              arrayFilteredByDeath[8]?.death,arrayFilteredByDeath[9]?.death,
-              arrayFilteredByDeath[10]?.death],
+        data: [
+          arrayFilteredByDeath[0]?.death,
+          arrayFilteredByDeath[1]?.death,
+          arrayFilteredByDeath[2]?.death,
+          arrayFilteredByDeath[3]?.death,
+          arrayFilteredByDeath[4]?.death,
+          arrayFilteredByDeath[5]?.death,
+          arrayFilteredByDeath[6]?.death,
+          arrayFilteredByDeath[7]?.death,
+          arrayFilteredByDeath[8]?.death,
+          arrayFilteredByDeath[9]?.death,
+          arrayFilteredByDeath[10]?.death,
+        ],
       },
     ],
   };
 
+  const sortNationByCases = (a) => {
+    a.sort(function (a, b) {
+      return b.total - a.total;
+    });
+  };
 
-  const sortNationByCases = (a) =>{
-    a.sort(function(a, b) {
-      return (b.total) - (a.total);
-  });
-  }
-
-const sortNationByDeath = (a) =>{
-    a.sort(function(a, b) {
-      return (b.death) - (a.death);
-  });
-  }
+  const sortNationByDeath = (a) => {
+    a.sort(function (a, b) {
+      return b.death - a.death;
+    });
+  };
 
   return (
     <>
@@ -173,11 +205,7 @@ const sortNationByDeath = (a) =>{
 
         <Card sx={{ width: 450, marginTop: 8, marginBottom: 5 }}>
           <CardActionArea>
-            <CardMedia
-              component="img"
-              height="140"
-              image={ricoverati}
-            />
+            <CardMedia component="img" height="140" image={ricoverati} />
             <CardContent>
               <Typography>
                 <b>Ricoveri Totali</b>: {api.recovered} milioni
@@ -189,7 +217,7 @@ const sortNationByDeath = (a) =>{
           </CardActionArea>
         </Card>
       </div>
-      <div style={{ display: "flex", maxWidth: 750 }}>
+      <Grid style={{ display: "flex", maxWidth: 750 }}>
         <Bar
           data={state1}
           options={{
@@ -206,6 +234,7 @@ const sortNationByDeath = (a) =>{
           }}
         />
         <Pie
+          style={{ marginLeft: 150 }}
           data={state1}
           options={{
             plugins: {
@@ -220,8 +249,8 @@ const sortNationByDeath = (a) =>{
             },
           }}
         />
-        </div>
-        <div style={{ display: "flex", maxWidth: 750 }}>      
+      </Grid>
+      <Grid style={{ display: "flex", maxWidth: 750 }}>
         <Bar
           data={state}
           options={{
@@ -237,7 +266,7 @@ const sortNationByDeath = (a) =>{
             },
           }}
         />
-      </div>
+      </Grid>
     </>
   );
 }
