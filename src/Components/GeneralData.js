@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Bar } from "react-chartjs-2";
+import { Bar, Pie } from "react-chartjs-2";
 import {
   Card,
   CardContent,
@@ -21,16 +21,21 @@ const continenti = [
   "USA",
   "UK",
   "Japan",
+  "Brazil",
   "Canada",
   "China",
+  "Spain",
   "Germany",
   "France",
   "India",
+  "Russia",
 ];
 
 export default function GeneralData() {
   const array = [];
   const [api, setApi] = useState([]);
+  const [arrayFiltered, setArrayFiltered] = useState(array);
+  const [arrayFilteredByDeath, setArrayFilteredByDeath] = useState(array);
   const [countryInfettati, setCountryInfettati] = useState(0);
   const [totalCases, setTotalCases] = useState(0);
   const [dailyCases, setDailyCases] = useState(0);
@@ -54,25 +59,11 @@ export default function GeneralData() {
       response.data.map((item) => ({
         nation: item.country,
         value: item.todayCases,
-        total: item.cases
+        total: item.cases,
+        death: item.deaths
       }))
     );
   };
-
-  const state = {
-    labels: ["Casi Giornalieri"],
-    datasets: [
-      {
-        label: "Casi Giornalieri",
-        backgroundColor: ["rgb(255, 99, 132)"],
-        borderColor: "rgba(0,0,0,1)",
-        borderWidth: 2,
-        data: [dailyCases],
-      },
-    ],
-  };
-
-  
 
   useEffect(() => {
     getCovidApi();
@@ -86,22 +77,58 @@ export default function GeneralData() {
         if (country === continenti[i]) {
           array.push(element);
         }
+        
       }
     });
+    setArrayFiltered(array);
     sortNationByCases(array);
-    console.log(array)
+    sortNationByDeath(arrayFilteredByDeath);
   }, [continent]);
 
 
   const state1 = {
-    labels: [array[0]?.nation],
+    labels: [arrayFiltered[0]?.nation, arrayFiltered[1]?.nation, 
+            arrayFiltered[2]?.nation,arrayFiltered[3]?.nation,
+            arrayFiltered[4]?.nation, arrayFiltered[5]?.nation,
+            arrayFiltered[6]?.nation,arrayFiltered[7]?.nation,
+            arrayFiltered[8]?.nation, arrayFiltered[9]?.nation,
+            arrayFiltered[10]?.nation],
     datasets: [
       {
         label: "Casi Totali",
         backgroundColor: ["rgb(255, 205, 86)"],
         borderColor: "rgba(0,0,0,1)",
         borderWidth: 2,
-        data: [array[0]?.total],
+        data: [arrayFiltered[0]?.total,arrayFiltered[1]?.total,
+              arrayFiltered[2]?.total,arrayFiltered[3]?.total,
+              arrayFiltered[4]?.total,arrayFiltered[5]?.total,
+              arrayFiltered[6]?.total,arrayFiltered[7]?.total,
+              arrayFiltered[8]?.total, arrayFiltered[9]?.total,
+              arrayFiltered[10]?.total],
+      },
+    ],
+  };
+
+
+    const state = {
+    labels: [arrayFilteredByDeath[0]?.nation,arrayFilteredByDeath[1]?.nation,
+            arrayFilteredByDeath[2]?.nation,arrayFilteredByDeath[3]?.nation,
+            arrayFilteredByDeath[4]?.nation,arrayFilteredByDeath[5]?.nation,
+            arrayFilteredByDeath[6]?.nation,arrayFilteredByDeath[7]?.nation,
+            arrayFilteredByDeath[8]?.nation,arrayFilteredByDeath[9]?.nation,
+            arrayFilteredByDeath[10]?.nation,],
+    datasets: [
+      {
+        label: "Casi Giornalieri",
+        backgroundColor: ["rgb(255, 99, 132)"],
+        borderColor: "rgba(0,0,0,1)",
+        borderWidth: 2,
+        data: [arrayFilteredByDeath[0]?.death,arrayFilteredByDeath[1]?.death,
+              arrayFilteredByDeath[2]?.death,arrayFilteredByDeath[3]?.death,
+              arrayFilteredByDeath[4]?.death,arrayFilteredByDeath[5]?.death,
+              arrayFilteredByDeath[6]?.death,arrayFilteredByDeath[7]?.death,
+              arrayFilteredByDeath[8]?.death,arrayFilteredByDeath[9]?.death,
+              arrayFilteredByDeath[10]?.death],
       },
     ],
   };
@@ -110,6 +137,12 @@ export default function GeneralData() {
   const sortNationByCases = (a) =>{
     a.sort(function(a, b) {
       return (b.total) - (a.total);
+  });
+  }
+
+const sortNationByDeath = (a) =>{
+    a.sort(function(a, b) {
+      return (b.death) - (a.death);
   });
   }
 
@@ -144,7 +177,6 @@ export default function GeneralData() {
               component="img"
               height="140"
               image={ricoverati}
-              alt="green iguana"
             />
             <CardContent>
               <Typography>
@@ -158,13 +190,13 @@ export default function GeneralData() {
         </Card>
       </div>
       <div style={{ display: "flex", maxWidth: 750 }}>
-        {/* <Bar
-          data={state}
+        <Bar
+          data={state1}
           options={{
             plugins: {
               title: {
                 display: true,
-                text: "Daily cases in the world",
+                text: "Most Covid19 cases in the World",
               },
               legend: {
                 display: true,
@@ -172,14 +204,31 @@ export default function GeneralData() {
               },
             },
           }}
-        /> */}
-        <Bar
+        />
+        <Pie
           data={state1}
           options={{
             plugins: {
               title: {
                 display: true,
-                text: "Daily death in the world ",
+                text: "Most Covid19 cases in the World",
+              },
+              legend: {
+                display: true,
+                position: "bottom",
+              },
+            },
+          }}
+        />
+        </div>
+        <div style={{ display: "flex", maxWidth: 750 }}>      
+        <Bar
+          data={state}
+          options={{
+            plugins: {
+              title: {
+                display: true,
+                text: "Most Covid19 deaths in the World",
               },
               legend: {
                 display: true,
