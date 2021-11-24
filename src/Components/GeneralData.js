@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import virus from "../assets/virus.jpg";
 import ricoverati from "../assets/ricoverati.jpg";
+import casi from '../assets/CovidCasi.png';
 
 const url = {
   all: "https://disease.sh/v3/covid-19/all",
@@ -181,7 +182,7 @@ export default function GeneralData() {
   return (
     <>
       <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-        <Card sx={{ width: 450, marginTop: 8, marginBottom: 5 }}>
+        {/* <Card sx={{ width: 450, marginTop: 8, marginBottom: 5 }}>
           <CardActionArea>
             <CardMedia
               component="img"
@@ -215,57 +216,110 @@ export default function GeneralData() {
               </Typography>
             </CardContent>
           </CardActionArea>
+        </Card> */}
+        <Card sx={{ width: 1100, marginTop: 6, marginBottom: 6 }}>
+          <CardActionArea>
+            <CardMedia component="img" height="140" image={virus} />
+            <CardContent>
+              <Typography>
+                <b>COVID19</b> La malattia da coronavirus (COVID-19) è una
+                patologia infettiva causata dal virus SARS-CoV-2. La maggior
+                parte delle persone che contraggono il virus sviluppa sintomi
+                lievi o moderati e guarisce senza avere bisogno di cure
+                particolari. Tuttavia, alcune sviluppano una forma di malattia
+                grave e necessitano di assistenza sanitaria.
+              </Typography>
+              <Typography>
+                <b>Come si diffonde:</b> l virus può diffondersi in piccole
+                particelle liquide che fuoriescono dalla bocca o dal naso di una
+                persona infetta, ad esempio tossendo, starnutendo, parlando,
+                cantando o respirando. Tali particelle sono di varie dimensioni,
+                dalle più grandi goccioline respiratorie fino ai più piccoli
+                aerosol. Si può contrarre l'infezione respirando il virus se ci
+                si trova nelle vicinanze di una persona affetta da COVID-19,
+                oppure toccando una superficie contaminata e poi toccandosi gli
+                occhi, il naso o la bocca. Il virus si diffonde più facilmente
+                al chiuso o in ambienti affollati.
+              </Typography>
+            </CardContent>
+          </CardActionArea>
         </Card>
       </div>
-      <Grid style={{ display: "flex", maxWidth: 750 }}>
-        <Bar
-          data={state1}
-          options={{
-            plugins: {
-              title: {
-                display: true,
-                text: "Most Covid19 cases in the World",
+      <Grid container spacing={2}>
+        <Grid xs={6} sx={{ marginLeft: 2, marginRight: 2 }}>
+          <Bar
+            data={state1}
+            options={{
+              plugins: {
+                title: {
+                  display: true,
+                  text: "Most Covid19 cases in the World",
+                },
+                legend: {
+                  display: true,
+                  position: "bottom",
+                },
               },
-              legend: {
-                display: true,
-                position: "bottom",
-              },
-            },
-          }}
-        />
-        <Pie
-          style={{ marginLeft: 150 }}
-          data={state1}
-          options={{
-            plugins: {
-              title: {
-                display: true,
-                text: "Most Covid19 cases in the World",
-              },
-              legend: {
-                display: true,
-                position: "bottom",
-              },
-            },
-          }}
-        />
+            }}
+          />
+        </Grid>
+        <Grid xs={4} sx={{ marginLeft: 2, marginTop: 8 }}>
+          <Card>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                height="140"
+                image={casi}
+                alt="green iguana"
+              />
+              <CardContent>
+                <Typography>
+                  <b>Casi Totali</b>: {totalCases} milioni
+                </Typography>
+                <Typography>
+                  <b>Morti Totali</b>: {deathCases} milioni
+                </Typography>
+                <Typography>
+                  <b>Nazioni Infettate</b>: {countryInfettati}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
       </Grid>
-      <Grid style={{ display: "flex", maxWidth: 750 }}>
-        <Bar
-          data={state}
-          options={{
-            plugins: {
-              title: {
-                display: true,
-                text: "Most Covid19 deaths in the World",
+      <Grid container spacing={2}>
+        <Grid xs={6} sx={{ marginLeft: 2, marginRight: 2 }}>
+          <Bar
+            data={state}
+            options={{
+              plugins: {
+                title: {
+                  display: true,
+                  text: "Most Covid19 deaths in the World",
+                },
+                legend: {
+                  display: true,
+                  position: "bottom",
+                },
               },
-              legend: {
-                display: true,
-                position: "bottom",
-              },
-            },
-          }}
-        />
+            }}
+          />
+        </Grid>
+        <Grid xs={4}>
+          <Card sx={{ marginLeft: 2, marginTop: 8 }}>
+            <CardActionArea>
+              <CardMedia component="img" height="140" image={ricoverati} />
+              <CardContent>
+                <Typography>
+                  <b>Ricoveri Totali</b>: {api.recovered} milioni
+                </Typography>
+                <Typography>
+                  <b>Ricoveri Giornalieri</b>: {api.todayRecovered} mila
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
       </Grid>
     </>
   );
