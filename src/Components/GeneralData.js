@@ -88,9 +88,7 @@ export default function GeneralData() {
     sortNationByDeath(array1);
     setArrayFilteredByDeath(array1);
     console.log("ARRAYCASES", arrayFiltered);
-    //sortNationByCases(array);
-    //sortNationByDeath(arrayFilteredByDeath);
-    //setArrayFilteredByDeath(arrayFilteredByDeath);
+   
   }, [continent]);
 
   const state1 = {
@@ -182,41 +180,6 @@ export default function GeneralData() {
   return (
     <>
       <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-        {/* <Card sx={{ width: 450, marginTop: 8, marginBottom: 5 }}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              height="140"
-              image={virus}
-              alt="green iguana"
-            />
-            <CardContent>
-              <Typography>
-                <b>Casi Totali</b>: {totalCases} milioni
-              </Typography>
-              <Typography>
-                <b>Morti Totali</b>: {deathCases} milioni
-              </Typography>
-              <Typography>
-                <b>Nazioni Infettate</b>: {countryInfettati}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
-
-        <Card sx={{ width: 450, marginTop: 8, marginBottom: 5 }}>
-          <CardActionArea>
-            <CardMedia component="img" height="140" image={ricoverati} />
-            <CardContent>
-              <Typography>
-                <b>Ricoveri Totali</b>: {api.recovered} milioni
-              </Typography>
-              <Typography>
-                <b>Ricoveri Giornalieri</b>: {api.todayRecovered} mila
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card> */}
         <Card sx={{ width: 1100, marginTop: 6, marginBottom: 6 }}>
           <CardActionArea>
             <CardMedia component="img" height="140" image={virus} />
