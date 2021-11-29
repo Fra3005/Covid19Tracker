@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import virus from "../assets/virus.jpg";
 import ricoverati from "../assets/ricoverati.jpg";
-import casi from '../assets/CovidCasi.png';
+import casi from "../assets/CovidCasi.png";
 
 const url = {
   all: "https://disease.sh/v3/covid-19/all",
@@ -88,7 +88,6 @@ export default function GeneralData() {
     sortNationByDeath(array1);
     setArrayFilteredByDeath(array1);
     console.log("ARRAYCASES", arrayFiltered);
-   
   }, [continent]);
 
   const state1 = {
@@ -108,7 +107,7 @@ export default function GeneralData() {
     datasets: [
       {
         label: "Casi Totali",
-        backgroundColor: ["rgb(255, 205, 86)", "rgb(255, 99, 132)"],
+        backgroundColor: ["rgba(75, 192, 192, 0.2)", "rgba(255, 206, 86, 0.2)"],
         borderColor: "rgba(0,0,0,1)",
         borderWidth: 2,
         data: [
@@ -145,7 +144,7 @@ export default function GeneralData() {
     datasets: [
       {
         label: "Casi Giornalieri",
-        backgroundColor: ["rgb(255, 99, 132)"],
+        backgroundColor: ["rgb(255, 99, 132)", "rgba(54, 162, 235, 0.2)"],
         borderColor: "rgba(0,0,0,1)",
         borderWidth: 2,
         data: [
@@ -208,80 +207,82 @@ export default function GeneralData() {
           </CardActionArea>
         </Card>
       </div>
-      <Grid container spacing={2}>
-        <Grid xs={6} sx={{ marginLeft: 2, marginRight: 2 }}>
-          <Bar
-            data={state1}
-            options={{
-              plugins: {
-                title: {
-                  display: true,
-                  text: "Most Covid19 cases in the World",
+      <Grid container style={{ marginLeft: 20 }}>
+        <Grid container spacing={2}>
+          <Grid xs={6} sx={{ marginLeft: 2, marginRight: 2 }}>
+            <Bar
+              data={state1}
+              options={{
+                plugins: {
+                  title: {
+                    display: true,
+                    text: "Most Covid19 cases in the World",
+                  },
+                  legend: {
+                    display: true,
+                    position: "bottom",
+                  },
                 },
-                legend: {
-                  display: true,
-                  position: "bottom",
-                },
-              },
-            }}
-          />
+              }}
+            />
+          </Grid>
+          <Grid xs={4} sx={{ marginLeft: 2, marginTop: 8 }}>
+            <Card>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image={casi}
+                  alt="green iguana"
+                />
+                <CardContent>
+                  <Typography>
+                    <b>Casi Totali</b>: {totalCases} milioni
+                  </Typography>
+                  <Typography>
+                    <b>Morti Totali</b>: {deathCases} milioni
+                  </Typography>
+                  <Typography>
+                    <b>Nazioni Infettate</b>: {countryInfettati}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </Grid>
         </Grid>
-        <Grid xs={4} sx={{ marginLeft: 2, marginTop: 8 }}>
-          <Card>
-            <CardActionArea>
-              <CardMedia
-                component="img"
-                height="140"
-                image={casi}
-                alt="green iguana"
-              />
-              <CardContent>
-                <Typography>
-                  <b>Casi Totali</b>: {totalCases} milioni
-                </Typography>
-                <Typography>
-                  <b>Morti Totali</b>: {deathCases} milioni
-                </Typography>
-                <Typography>
-                  <b>Nazioni Infettate</b>: {countryInfettati}
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
-        </Grid>
-      </Grid>
-      <Grid container spacing={2}>
-        <Grid xs={6} sx={{ marginLeft: 2, marginRight: 2 }}>
-          <Bar
-            data={state}
-            options={{
-              plugins: {
-                title: {
-                  display: true,
-                  text: "Most Covid19 deaths in the World",
+        <Grid container spacing={2}>
+          <Grid xs={6} sx={{ marginLeft: 2, marginRight: 2, marginTop: 2 }}>
+            <Bar
+              data={state}
+              options={{
+                plugins: {
+                  title: {
+                    display: true,
+                    text: "Most Covid19 deaths in the World",
+                  },
+                  legend: {
+                    display: true,
+                    position: "bottom",
+                  },
                 },
-                legend: {
-                  display: true,
-                  position: "bottom",
-                },
-              },
-            }}
-          />
-        </Grid>
-        <Grid xs={4}>
-          <Card sx={{ marginLeft: 2, marginTop: 8 }}>
-            <CardActionArea>
-              <CardMedia component="img" height="140" image={ricoverati} />
-              <CardContent>
-                <Typography>
-                  <b>Ricoveri Totali</b>: {api.recovered} milioni
-                </Typography>
-                <Typography>
-                  <b>Ricoveri Giornalieri</b>: {api.todayRecovered} mila
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
+              }}
+            />
+          </Grid>
+          <Grid xs={4}>
+            <Card sx={{ marginLeft: 2, marginTop: 10 }}>
+              <CardActionArea>
+                <CardMedia component="img" height="140" image={ricoverati} />
+                <CardContent>
+                  <Typography>
+                    <b>Ricoveri Totali</b>: {api.recovered} milioni
+                  </Typography>
+                  <Typography>
+                    <b>Ricoveri Giornalieri</b>: {api.todayRecovered} mila
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </Grid>
         </Grid>
       </Grid>
     </>
