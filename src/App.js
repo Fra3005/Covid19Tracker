@@ -2,7 +2,8 @@ import {
   BrowserRouter as Router,
   Route,
   Link,
-  Routes
+  Routes,
+  Navigate
 } from "react-router-dom";
 
 import GeneralData from "./Components/GeneralData";
@@ -17,6 +18,8 @@ function App() {
       <Route path="/General" element={ <GeneralData />}> 
       </Route>  
       <Route path="/country" element= {<CountryData/>}>
+        </Route>
+        <Route path="/" element= {<Navigate to={'/General'}/>}>
         </Route>   
     </Routes>
   </Router>
