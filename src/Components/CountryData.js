@@ -2,7 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { TextField, Button } from "@mui/material";
 import { Pie } from "react-chartjs-2";
-
+import {
+  Card,
+  CardContent,
+  Typography,
+  CardActionArea,
+  CardMedia,
+  Grid,
+} from "@mui/material";
 
 const url = {
     countries: "https://disease.sh/v3/covid-19/countries/"
@@ -49,9 +56,56 @@ export default function CountryData () {
         <div style={{display:"flex", justifyContent:"center", marginTop:10}}>
             <TextField variant="outlined" value={country} onChange={(e)=>{setCountry(e.target.value)}}></TextField>
             <Button variant="contained" onClick={()=>{getApiCountry(country)}} style={{marginLeft:3}}>Cerca</Button>
-        </div>
+            </div>
+          <div>
+          <Card>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  
+                  alt="green iguana"
+                />
+                <CardContent>
+                  <Typography>
+                    <b>Casi Totali</b>:  milioni
+                  </Typography>
+                  <Typography>
+                    <b>Morti Totali</b>:  milioni
+                  </Typography>
+                  <Typography>
+                    <b>Nazioni Infettate</b>: 
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </div>
+        
         <div>
-        <Pie
+        <Grid xs={6} sx={{ marginLeft: 2, marginTop: 8 }}>
+            <Card>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  
+                  alt="green iguana"
+                />
+                <CardContent>
+                  <Typography>
+                    <b>Casi Totali</b>:  milioni
+                  </Typography>
+                  <Typography>
+                    <b>Morti Totali</b>:  milioni
+                  </Typography>
+                  <Typography>
+                    <b>Nazioni Infettate</b>: 
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </Grid>
+        {/* <Pie
         data={state1}
         options={{
           plugins: {
@@ -65,7 +119,7 @@ export default function CountryData () {
            }
           }
         }}
-      />
+      /> */}
         </div>
         </>
     )
