@@ -11,6 +11,8 @@ import {
   Box,
 } from "@mui/material";
 
+import Error from './404';
+
 const url = {
   countries: "https://disease.sh/v3/covid-19/countries/",
 };
@@ -81,47 +83,41 @@ export default function CountryData() {
         </Grid>
         <Grid item xs={2.5}></Grid>
       </Grid>
-
-      <div>
-        <Grid container spacing={2}>
-          <Grid item xs={2}></Grid>
-          <Grid item xs={8} style={{ marginTop: 8 }}>
-            <Card sx={{ display: "flex", marginLeft: 10 }}>
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <CardContent sx={{ flex: "1 0 auto" }}>
-                  <Typography component="div" variant="h4">
-                    {country} Data
-                  </Typography>
-                  <Typography>
-                    <b>Popolazione</b>:{api?.population}
-                  </Typography>
-                  <Typography>
-                    <b>Casi oggi</b>: {api?.todayCases}
-                  </Typography>
-                  <Typography>
-                    <b>Ricoverati oggi</b>:{api?.todayRecovered}
-                  </Typography>
-                  <Typography>
-                    <b>Morti oggi</b>: {api?.todayDeaths}
-                  </Typography>
-                </CardContent>
-                <Box
-                  sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}
-                ></Box>
-              </Box>
-              <CardMedia
-                component="img"
-                sx={{ width: 300, height: 150 }}
-                src={`https://flagcdn.com/16x12/${api?.countryInfo?.iso2?.toLowerCase()}.png`}
-                srcset={[
-                  `https://flagcdn.com/32x24/${api?.countryInfo?.iso2?.toLowerCase()}.png 2x`,
-                  `https://flagcdn.com/48x36/${api?.countryInfo?.iso2?.toLowerCase()}.png 3x`,
-                ]}
-              />
-            </Card>
-          </Grid>
+      {country === "" ? <Error/>: <>
+      <Grid container spacing={2}>
+        <Grid item xs={2}></Grid>
+        <Grid item xs={8} style={{ marginTop: 15 }}>
+          <Card sx={{ marginLeft: 10 }}>
+            <CardMedia
+              component="img"
+              height="180"
+              src={`https://flagcdn.com/${api?.countryInfo?.iso2?.toLowerCase()}.svg`}
+              srcset={[
+                `https://flagcdn.com/${api?.countryInfo?.iso2?.toLowerCase()}.svg 2x`,
+                `https://flagcdn.com/${api?.countryInfo?.iso2?.toLowerCase()}.svg 3x`,
+              ]}
+            />
+            <CardContent>
+              <Typography component="div" variant="h4">
+                {country} Data
+              </Typography>
+              <Typography>
+                <b>Popolazione</b>:{api?.population}
+              </Typography>
+              <Typography>
+                <b>Casi oggi</b>: {api?.todayCases}
+              </Typography>
+              <Typography>
+                <b>Ricoverati oggi</b>:{api?.todayRecovered}
+              </Typography>
+              <Typography>
+                <b>Morti oggi</b>: {api?.todayDeaths}
+              </Typography>
+            </CardContent>
+          </Card>
         </Grid>
-      </div>
+      </Grid>
+      
 
       <Grid container spacing={2}>
         <Grid item xs={6}>
@@ -159,6 +155,10 @@ export default function CountryData() {
           />
         </Grid>
       </Grid>
+      </>
+      }
+      
+
     </>
   );
 }
