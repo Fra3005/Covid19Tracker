@@ -38,6 +38,8 @@ export default function CountryData() {
     ],
   };
 
+
+  
   useEffect(() => {
     getApiCountry(country);
   }, [country]);
